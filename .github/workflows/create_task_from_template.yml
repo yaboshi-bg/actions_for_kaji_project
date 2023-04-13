@@ -30,7 +30,7 @@ jobs:
             while read -r issue; do
               schedule=$(echo "${issue}" | jq -r '.title' | grep -o -E "^\[\[\[.*?(\]\]\])" | sed -E 's/(\[\s*)|(\s*\])//g')
               schedule_arr=($(echo $schedule | tr " " "\n"))
-              if { [ ${schedule_arr[0]} != "*" ] && [ ${schedule_arr[0]} != `date +"%-d"` ]; } || { [ ${schedule_arr[1]} != "*" ] && [ ${schedule_arr[1]} != `date +"%-m"` ]; } || { [ ${schedule_arr[2]} != "*" ] && [ ${schedule_arr[2]} != `date +"%w"` ]; }; then
+              if { [ ${schedule_arr[0]} != "*" ] && [ ${schedule_arr[0]} != `date +"%-d"` ]; } && { [ ${schedule_arr[1]} != "*" ] && [ ${schedule_arr[1]} != `date +"%-m"` ]; } && { [ ${schedule_arr[2]} != "*" ] && [ ${schedule_arr[2]} != `date +"%w"` ]; }; then
                 continue
               fi
               title_template=$(echo "${issue}" | jq -r '.title' | sed -E "s/^\[\[\[.*?(\]\]\]\s+)//g")
