@@ -33,19 +33,19 @@ jobs:
               
               if [ ${schedule_arr[0]} != "*" ] && [ ${schedule_arr[0]} != `date +"%-d"` ]; then
                 echo "日付不一致"
-                echo "{schedule_arr[0]}"
+                echo ${schedule_arr[0]}
                 echo date +"%-d"
                 continue
               fi
               if  [ ${schedule_arr[1]} != "*" ] && [ ${schedule_arr[1]} != `date +"%-m"` ]; then
                 echo "月不一致"
-                echo "{schedule_arr[1]}"
+                echo ${schedule_arr[1]}
                 echo date +"%-m"
                 continue
               fi
               if [ ${schedule_arr[2]} != "*" ] && [ ${schedule_arr[2]} != `date +"%w"` ]; then
                 echo "曜日不一致"
-                echo "{schedule_arr[2]}"
+                echo ${schedule_arr[2]}
                 echo date +"%w"
                 continue
               fi
