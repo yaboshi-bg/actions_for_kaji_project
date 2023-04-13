@@ -24,6 +24,8 @@ jobs:
             # templateというラベルの付いたissueを取得
             issue_list=`gh issue list -l template --json title,body`
             # テンプレートのissueをループし、必要ならkajiプロジェクト内にタスクを作成する
+            echo "templateラベルの付いたissue"
+            echo $issue_list
             echo $issue_list | jq -c '.[]' |
             while read -r issue; do
               schedule=$(echo "${issue}" | jq -r '.title' | grep -o -E "^\[\[\[.*?(\]\]\])" | sed -E 's/(\[\s*)|(\s*\])//g')
@@ -31,7 +33,7 @@ jobs:
               if [ ${schedule_arr[0]} != "*" ] && [ ${schedule_arr[0]} != `date +"%-d"` ]; then
                 continue
               fi
-              if  [ ${schedule_arr[1]} != "*" ] && [ ${schedule_arr[1]} != `date +"%-m"` ]; then
+              if [ ${schedule_arr[1]} != "*" ] && [ ${schedule_arr[1]} != `date +"%-m"` ]; then
                 continue
               fi
               if [ ${schedule_arr[2]} != "*" ] && [ ${schedule_arr[2]} != `date +"%w"` ]; then
