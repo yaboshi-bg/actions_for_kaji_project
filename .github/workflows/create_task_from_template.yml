@@ -7,7 +7,7 @@ on:
 # 手動実行
   workflow_dispatch:
 
-permissions: write-all
+# permissions: write-all
   # issues: write 
   # repository-projects: write
 
